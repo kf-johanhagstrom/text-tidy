@@ -12,7 +12,7 @@ with open('README.md') as f:
 setup(
     name='texttidy',
     version='0.0.2',
-    description='No frills text data cleaning methods. Stada means to tidy in Swedish.',
+    description='No frills curated text data cleaning methods for common text pre-processing in the NLP worflow.',
     long_description=readme,
     long_description_content_type="text/md",
     url='https://github.com/jhags/text-stada',
