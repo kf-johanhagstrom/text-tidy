@@ -103,16 +103,19 @@ def remove_dashes(text):
 def remove_bullets(text):
     """ Remove bullet characters and replace with fullstop. ●•·"""
     bullets = ['○', '●', '•', '·']
+    s = "\\" + ("|\\").join(bullets)
+
     # Remove bullets at start of string and replace with space
     text = text.strip()
-    for c in bullets:
-        rx = f"^\\{c}"
-        text = re.sub(rx, ' ', text)
 
-        # remove any other bullet and replace with fullstop
-        rx = f"\\{c}"
-        text = re.sub(rx, '.', text)
-        text = text.strip()
+    rx = f"^({s})"
+    text = re.sub(rx, ' ', text)
+
+    # remove any other bullet and replace with fullstop
+    rx = f"{s}"
+    text = re.sub(rx, '.', text)
+
+    text = text.strip()
     return space_sentencestops(text)
 
 
@@ -147,16 +150,19 @@ def remove_escapes(text):
 @vectorize
 def replace_contractions(text):
     """ Replace common contractions (e.g. don't) with full form (e.g. do not). The list of contractions have been derived from wikipedia (see: List of English contractions)."""
+    rx_compiled = []
     for k, v in config.CONTRACTIONS.items():
-        # sub exact matches
-        rx = rf"((?<=\s)|^)({k})((?=\s)|$)"
-        text = re.sub(rx, v, text, flags=re.IGNORECASE)
-
-        # sub words that missed the apostraphy eg theyve rather than they've
+        s = k
         if k.lower() not in config.CONTRACTIONS_EXCEPTIONS:
-            k = k.replace("'", "")
-            rx = rf"((?<=\s)|^)({k})((?=\s)|$)"
-            text = re.sub(rx, v, text, flags=re.IGNORECASE)
+            s1 = k.replace("'", "")
+            s += f"|{s1}"
+
+        # sub exact matches
+        rx = re.compile(rf"((?<=\s)|^)({s})((?=\s)|$)", flags=re.IGNORECASE)
+        rx_compiled.append((rx, v))
+
+    for rx, rpl in rx_compiled:
+        text = rx.sub(rpl, text)
 
     return text
 
@@ -175,20 +181,14 @@ def clean_quote_chars(text):
 @vectorize
 def replace_latin_abbrevs(text):
     """ Replace Latin abbreviations (eg, ie, and NB) with tidier forms (such as: (e.g.|e. g.|e.g) --> eg)"""
-    abr = [r"e\.g\.", r"e\. g\.", r"e\.g"]
-    for i in abr:
-        rx = fr"((?<=\s)|^)({i})((?=\s)|$)"
-        text = re.sub(rx, "eg", text, flags=re.IGNORECASE)
+    rx = r"((?<=\s)|^)(e\.g\.|e\. g\.|e\.g)((?=\s)|$)"
+    text = re.sub(rx, "eg", text, flags=re.IGNORECASE)
 
-    abr = [r"i\.e\.", r"i\. e\.", r"i\.e"]
-    for i in abr:
-        rx = fr"((?<=\s)|^)({i})((?=\s)|$)"
-        text = re.sub(rx, "ie", text, flags=re.IGNORECASE)
+    rx = r"((?<=\s)|^)(i\.e\.|i\. e\.|i\.e)((?=\s)|$)"
+    text = re.sub(rx, "ie", text, flags=re.IGNORECASE)
 
-    abr = [r"n\.b\.", r"n\. b\.", r"n\.b"]
-    for i in abr:
-        rx = fr"((?<=\s)|^)({i})((?=\s)|$)"
-        text = re.sub(rx, "nb", text, flags=re.IGNORECASE)
+    rx = r"((?<=\s)|^)(n\.b\.|n\. b\.|n\.b)((?=\s)|$)"
+    text = re.sub(rx, "nb", text, flags=re.IGNORECASE)
     return text
 
 
@@ -203,11 +203,9 @@ def remove_pronouns(text, pronouns='default'):
             arg_type = type(pronouns)
             raise TypeError(f"pronouns arguement expecting a list but received {arg_type}")
 
-    text = replace_contractions(text)
-
-    for pronoun in pronouns:
-        rx = rf"\b({pronoun})\b"
-        text = re.sub(rx, '', text, flags=re.IGNORECASE)
+    s = "|".join(pronouns)
+    rx = re.compile(rf"\b({s})\b", flags=re.IGNORECASE)
+    text = rx.sub('', text)
 
     return single_space(text)
 

@@ -154,7 +154,7 @@ def test_remove_pronouns():
     tests = [
         ("He went", "went"),
         ("what he wanted", "what wanted"),
-        ("they've needed.", "have needed.")
+        ("they've needed.", "'ve needed.")
         ]
     f = texttidy.remove_pronouns
     run_test(f, tests)
