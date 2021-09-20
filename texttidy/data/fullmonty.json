@@ -1,0 +1,55 @@
+{
+    "0": {
+        "step": "replace_latin_abbrevs"
+    },
+    "1": {
+        "step": "space_sentencestops",
+        "kwargs": {
+            "stop_chars": ".;!?,:"
+        }
+    },
+    "2": {
+        "step": "clean_quote_chars",
+        "kwargs": {}
+    },
+    "3": {
+        "step": "replace_contractions",
+        "kwargs": {}
+    },
+    "4": {
+        "step": "add_fullstop",
+        "kwargs": {
+            "stop_chars": ".?!",
+            "replace_chars": ";:,-/"
+        }
+    },
+    "5": {
+        "step": "remove_dashes",
+        "kwargs": {}
+    },
+    "6": {
+        "step": "remove_bullets",
+        "kwargs": {}
+    },
+    "7": {
+        "step": "remove_numerical_commas",
+        "kwargs": {}
+    },
+    "8": {
+        "step": "remove_punctuation",
+        "kwargs": {
+            "remove": "all",
+            "keep": ".,?!()%&"
+        }
+    },
+    "9": {
+        "step": "space_sentencestops",
+        "kwargs": {
+            "stop_chars": ".;!?,:"
+        }
+    },
+    "10": {
+        "step": "single_space",
+        "kwargs": {}
+    }
+}
