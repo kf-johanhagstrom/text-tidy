@@ -1,7 +1,7 @@
 import re
 import pytest
 
-import textstada
+import texttidy
 
 
 def msg(t, e, r):
@@ -28,7 +28,7 @@ def test_single_space():
         (' hello world', 'hello world'),
         ('hello  world ', 'hello world')
     ]
-    f = textstada.single_space
+    f = texttidy.single_space
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -40,7 +40,7 @@ def test_space_sentencestops():
         ('100.00', '100.00'),
         ('hello .  world.', 'hello.  world.')
         ]
-    f = textstada.space_sentencestops
+    f = texttidy.space_sentencestops
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -51,7 +51,7 @@ def test_remove_numerical_commas():
         ('100,0', '1000'),
         ('123,456.00', '123456.00')
     ]
-    f = textstada.remove_numerical_commas
+    f = texttidy.remove_numerical_commas
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -70,7 +70,7 @@ def test_remove_dashes():
         ('1-to-1', '1-to-1'),
         ('hello:-world', 'hello: world')
     ]
-    f = textstada.remove_dashes
+    f = texttidy.remove_dashes
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -84,7 +84,7 @@ def test_remove_bullets():
         ('● hello world', 'hello world'),
         ('· hello world.', 'hello world.')
     ]
-    f = textstada.remove_bullets
+    f = texttidy.remove_bullets
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -94,7 +94,7 @@ def test_remove_escapes():
         (' \n hello world \n hello world', 'hello world.  hello world'),
         ('\r hello world \t', 'hello world'),
     ]
-    f = textstada.remove_escapes
+    f = texttidy.remove_escapes
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -110,7 +110,7 @@ def test_add_fullstop():
         ('hello world!;::', 'hello world!'),
         ('hello world - ', 'hello world.')
         ]
-    f = textstada.add_fullstop
+    f = texttidy.add_fullstop
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -123,7 +123,7 @@ def test_replace_contractions():
         ("dont be silly", "do not be silly"),
         ("I'll not replace well nor ill", "I will not replace well nor ill")
         ]
-    f = textstada.replace_contractions
+    f = texttidy.replace_contractions
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -133,7 +133,7 @@ def test_clean_quote_chars():
         (r"‘Some bad quote’ and apos´s", "'Some bad quote' and apos's"),
         (r"“Bad double quotes”", '"Bad double quotes"')
         ]
-    f = textstada.clean_quote_chars
+    f = texttidy.clean_quote_chars
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -145,7 +145,7 @@ def test_replace_latin_abbrevs():
         ("e.g", "eg"),
         ("I.E.", "ie")
         ]
-    f = textstada.replace_latin_abbrevs
+    f = texttidy.replace_latin_abbrevs
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -156,7 +156,7 @@ def test_remove_pronouns():
         ("what he wanted", "what wanted"),
         ("they've needed.", "have needed.")
         ]
-    f = textstada.remove_pronouns
+    f = texttidy.remove_pronouns
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -166,7 +166,7 @@ def test_remove_punctuation():
         ('This is [a] "string". Hello world!', "This is a string . Hello world!"),
         ('{some} tricky/weird% (chars)', "some tricky weird% (chars)")
         ]
-    f = textstada.remove_punctuation
+    f = texttidy.remove_punctuation
     run_test(f, tests)
     run_list_test(f, tests)
 
@@ -183,7 +183,7 @@ def test_replace_tokens():
         "world": ["earth"],
         "reg": ["re"]
     }
-    f = textstada.replace_tokens
+    f = texttidy.replace_tokens
     run_test(f, tests, vals)
     run_list_test(f, tests, vals)
 
@@ -198,7 +198,7 @@ def test_strip_stopwords():
         ("1st I say 'Hello world' to you!", "Hello world' to you!")
         ]
 
-    f = textstada.strip_stopwords
+    f = texttidy.strip_stopwords
     options = {"from_start": True, "from_end": False, "remove_numeric_tokens": True, "trim_punc": True}
     run_test(f, tests, stopwords, **options)
     run_list_test(f, tests, stopwords, **options)
@@ -209,7 +209,7 @@ def test_strip_stopwords():
         ("1st I say 'Hello world' to you 2nd!", "1st I say 'Hello world")
         ]
 
-    f = textstada.strip_stopwords
+    f = texttidy.strip_stopwords
     options = {"from_start": False, "from_end": True, "remove_numeric_tokens": True, "trim_punc": True}
     run_test(f, tests, stopwords, **options)
     run_list_test(f, tests, stopwords, **options)
@@ -221,7 +221,7 @@ def test_strip_stopwords():
         ("1st I say 'Hello world' to you 2nd!", "Hello world")
         ]
 
-    f = textstada.strip_stopwords
+    f = texttidy.strip_stopwords
     options = {"from_start": True, "from_end": True, "remove_numeric_tokens": True, "trim_punc": True}
     run_test(f, tests, stopwords, **options)
     run_list_test(f, tests, stopwords, **options)
@@ -237,6 +237,6 @@ def test_remove_duplicate_sentencestops():
         ('hello!! ?? . . world.', 'hello! ? . world.'),
         ('hello!!??.. world.', 'hello!?. world.')
     ]
-    f = textstada.remove_duplicate_sentencestops
+    f = texttidy.remove_duplicate_sentencestops
     run_test(f, tests)
     run_list_test(f, tests)

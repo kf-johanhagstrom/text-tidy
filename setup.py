@@ -10,7 +10,7 @@ with open('README.md') as f:
 
 
 setup(
-    name='textstada',
+    name='texttidy',
     version='0.0.2',
     description='No frills text data cleaning methods. Stada means to tidy in Swedish.',
     long_description=readme,
@@ -23,9 +23,9 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.7",
     ],
-    packages=find_packages(include=['textstada', 'textstada.*']),
+    packages=find_packages(include=['texttidy', 'texttidy.*']),
     package_data={
-        "textstada": [
+        "texttidy": [
             "data/*.json",
             "data/*.txt"
             ]

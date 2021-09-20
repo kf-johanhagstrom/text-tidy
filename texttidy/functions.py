@@ -3,7 +3,7 @@ import json
 import re
 from functools import wraps
 
-from textstada import config
+from texttidy import config
 
 
 # Additional functions
@@ -218,7 +218,7 @@ def remove_punctuation(text, remove='all', keep='.,?!()%&'):
 
     Args:
         text (str or list): text or list of strings to clean.
-        remove (str, optional): If "all" then uses the default characters in textstada.PUNCT_ALL, else removes all characters in the string. Defaults to 'all'.
+        remove (str, optional): If "all" then uses the default characters in texttidy.PUNCT_ALL, else removes all characters in the string. Defaults to 'all'.
         keep (str, optional): Keeps all characters in the string. Defaults to '.,?!()%&'.
     """
     if remove=='all':

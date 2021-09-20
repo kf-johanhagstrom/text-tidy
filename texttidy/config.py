@@ -2,7 +2,7 @@
 import importlib.resources
 import json
 
-import textstada
+import texttidy
 
 from . import data
 

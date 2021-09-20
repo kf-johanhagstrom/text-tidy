@@ -5,5 +5,5 @@
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.testing.pytestEnabled": true,
-    "python.pythonPath": "C:\\Users\\hag67301\\.conda\\envs\\textstada\\python.exe"
+    "python.pythonPath": "C:\\Users\\hag67301\\.conda\\envs\\text-tidy\\python.exe"
 }

@@ -3,7 +3,7 @@
 import inspect
 import json
 
-import textstada
+import texttidy
 
 
 def generate_pipeline_file(steps, write_to_json=None):
@@ -20,7 +20,7 @@ def generate_pipeline_file(steps, write_to_json=None):
     eval_steps = []
     for step in steps:
         try:
-            eval_steps.append(eval(f"textstada.{step}"))
+            eval_steps.append(eval(f"texttidy.{step}"))
         except:
             raise TypeError(f"'{step}' not recognised in function list.")
 

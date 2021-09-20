@@ -4,7 +4,7 @@ import json
 
 from tqdm import tqdm
 
-import textstada
+import texttidy
 
 
 class Pipeline:
@@ -40,7 +40,7 @@ class Pipeline:
         eval_steps = []
         for step in self.steps:
             try:
-                eval_steps.append(eval(f"textstada.{step}"))
+                eval_steps.append(eval(f"texttidy.{step}"))
             except:
                 raise TypeError(f"'{step}' not recognised in function list.")
         return eval_steps
