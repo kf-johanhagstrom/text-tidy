@@ -12,10 +12,10 @@ with open('README.md') as f:
 setup(
     name='texttidy',
     version='0.0.2',
-    description='No frills curated text data cleaning methods for common text pre-processing in the NLP worflow.',
+    description='No frills curated text data cleaning methods for common text pre-processing in the NLP workflow.',
     long_description=readme,
     long_description_content_type="text/md",
-    url='https://github.com/jhags/text-stada',
+    url='https://github.com/jhags/text-tidy',
     author='J Hagstrom',
     license='MIT',
     classifiers=[

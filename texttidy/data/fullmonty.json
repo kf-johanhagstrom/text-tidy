@@ -49,6 +49,10 @@
         }
     },
     "10": {
+        "step": "remove_duplicate_sentencestops",
+        "kwargs": {}
+    },
+    "11": {
         "step": "single_space",
         "kwargs": {}
     }
