@@ -195,7 +195,8 @@ def test_strip_stopwords():
     tests = [
         ("I say 'Hello world' to you", "Hello world' to you"),
         ("(1) I say 'Hello world' to you!", "Hello world' to you!"),
-        ("1st I say 'Hello world' to you!", "Hello world' to you!")
+        ("1st I say 'Hello world' to you!", "Hello world' to you!"),
+        ("¢ 1st I say 'Hello world' to you! ¢", "Hello world' to you! ¢")
         ]
 
     f = texttidy.strip_stopwords
@@ -206,7 +207,8 @@ def test_strip_stopwords():
     tests = [
         ("I say 'Hello world' to you", "I say 'Hello world"),
         ("(1) I say 'Hello world' to you!", "(1) I say 'Hello world"),
-        ("1st I say 'Hello world' to you 2nd!", "1st I say 'Hello world")
+        ("1st I say 'Hello world' to you 2nd!", "1st I say 'Hello world"),
+        ("¢ 1st I say 'Hello world' to you! ¢", "¢ 1st I say 'Hello world")
         ]
 
     f = texttidy.strip_stopwords
@@ -218,7 +220,8 @@ def test_strip_stopwords():
         ("I say 'Hello world' to you", "Hello world"),
         ("(1) I say 'Hello world' to you!", "Hello world"),
         ("I say to you!", ""),
-        ("1st I say 'Hello world' to you 2nd!", "Hello world")
+        ("1st I say 'Hello world' to you 2nd!", "Hello world"),
+        ("¢ 1st I say 'Hello world' to you! ¢", "Hello world")
         ]
 
     f = texttidy.strip_stopwords

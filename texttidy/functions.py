@@ -258,7 +258,8 @@ def strip_stopwords(text, stopwords, from_start=True, from_end=True, remove_nume
 
     if from_start:
         if trim_punc:
-            if text[0] in config.PUNCT_ALL:
+            # Dont use built in punct and check for non-alphanumeric chars instead.
+            if not text[0].isalnum():
                 text = text[1:].strip()
                 return strip_stopwords(text, stopwords, from_start=from_start, from_end=from_end, remove_numeric_tokens=remove_numeric_tokens, trim_punc=trim_punc)
 
@@ -276,7 +277,8 @@ def strip_stopwords(text, stopwords, from_start=True, from_end=True, remove_nume
 
     if from_end:
         if trim_punc:
-            if text[-1] in config.PUNCT_ALL:
+            # Dont use built in punct and check for non-alphanumeric chars instead.
+            if not text[-1].isalnum():
                 text = text[:-1].strip()
                 return strip_stopwords(text, stopwords, from_start=from_start, from_end=from_end, remove_numeric_tokens=remove_numeric_tokens, trim_punc=trim_punc)
 
